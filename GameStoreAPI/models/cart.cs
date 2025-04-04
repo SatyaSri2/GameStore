@@ -6,13 +6,13 @@ namespace GameStoreAPI.Models
     {
         public int Id { get; set; }
 
-        [Required]
+       
         public int UserId { get; set; }
 
-        [Required]
-        public string GameTitle { get; set; }
+       
+        public string GameTitle { get; set; } = string.Empty;
 
-        [Required]
+        public string GameDescription { get; set; } = string.Empty;
         public decimal Price { get; set; }
     }
 }

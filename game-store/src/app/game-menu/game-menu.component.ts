@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-game-menu',
@@ -233,3 +234,4 @@ export class GameMenuComponent {
   }
 
 }
+
