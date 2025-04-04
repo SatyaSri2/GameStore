@@ -1,0 +1,80 @@
+<!-- <div class="game-container">
+  <div class="game-card" *ngFor="let game of games">
+    <img [src]="game.image" alt="{{ game.name }}" />
+    <h3>{{ game.name }}</h3>
+    <p>Rating: {{ game.rating }}/5</p>
+    <p class="game-price">₹ {{ game.price }}</p>
+    
+    <div class="button-container">
+      <button class="add-to-cart" (click)="addToCart(game)">Add to Cart</button>
+      <button class="go-to-cart" (click)="navigateToCart()">Go to Cart</button>
+    </div>
+  </div>
+</div> -->
+
+<div class="home-container">
+  <header class="home-header">
+    <div class="logo">
+      <i class="fas fa-gamepad"></i>
+      <h1>Game Haven</h1>
+    </div>
+    <p class="tagline">Explore and buy the best games</p>
+  </header>
+
+  <main class="home-main">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h2>Welcome to Game Haven</h2>
+        <p>Discover the latest and greatest games right here!</p>
+        
+        <div class="auth-container" *ngIf="!isAuthenticated">
+          <div class="auth-tabs">
+            <button [class.active]="showLoginForm" (click)="toggleForm()">Login</button>
+            <button [class.active]="!showLoginForm" (click)="toggleForm()">Sign Up</button>
+          </div>
+
+          <form class="auth-form" *ngIf="showLoginForm" (ngSubmit)="onLogin()">
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" [(ngModel)]="loginData.email" name="loginEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" [(ngModel)]="loginData.password" name="loginPassword" required>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+          </form>
+
+          <form class="auth-form" *ngIf="!showLoginForm" (ngSubmit)="onSignup()">
+            <div class="form-group">
+              <label for="signup-name">Full Name</label>
+              <input type="text" id="signup-name" [(ngModel)]="signupData.name" name="signupName" required>
+            </div>
+            <div class="form-group">
+              <label for="signup-email">Email</label>
+              <input type="email" id="signup-email" [(ngModel)]="signupData.email" name="signupEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="signup-password">Password</label>
+              <input type="password" id="signup-password" [(ngModel)]="signupData.password" name="signupPassword" required>
+            </div>
+            <div class="form-group">
+              <label for="signup-confirm">Confirm Password</label>
+              <input type="password" id="signup-confirm" [(ngModel)]="signupData.confirmPassword" name="signupConfirm" required>
+            </div>
+            <button type="submit" class="submit-btn">Sign Up</button>
+          </form>
+        </div>
+
+        <div class="welcome-message" *ngIf="isAuthenticated">
+          <h3>Welcome back!</h3>
+          <p>Redirecting you to our exclusive game collection...</p>
+        </div>
+      </div>
+      
+      <div class="hero-image">
+        <img src="https://img.freepik.com/free-vector/black-yellow-game-sporty-background-with-grungy-effect_1017-56689.jpg" alt="Gaming experience">
+      </div>
+    </div>
+  </main>
+</div>

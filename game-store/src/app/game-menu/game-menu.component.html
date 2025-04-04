@@ -1,0 +1,159 @@
+<div class="menu-container">
+    <div class="menu-header">
+      <div class="menu-tabs">
+        <button class="tab-btn" [class.active]="activeTab === 'all'" (click)="setActiveTab('all')">All Games</button>
+        <button class="tab-btn" [class.active]="activeTab === 'action'" (click)="setActiveTab('action')">Action</button>
+        <button class="tab-btn" [class.active]="activeTab === 'adventure'" (click)="setActiveTab('adventure')">Adventure</button>
+        <button class="tab-btn" [class.active]="activeTab === 'racing'" (click)="setActiveTab('racing')">Racing</button>
+        <button class="tab-btn" [class.active]="activeTab === 'shooter'" (click)="setActiveTab('shooter')">Shooter</button>
+      </div>
+      <div class="search-filter">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search games..." [(ngModel)]="searchQuery" (input)="onSearch()">
+        </div>
+      </div>
+    </div>
+  
+    <div class="menu-categories">
+      <!-- No Results Found -->
+      <div class="no-results-found" *ngIf="filteredGames.length === 0 && searchQuery">
+        <div class="no-results-content">
+          <i class="fas fa-gamepad-slash no-results-icon"></i>
+          <h3>No games found for "{{searchQuery}}"</h3>
+          <p>Try searching for another title or browse our categories.</p>
+          <div class="suggestions">
+            <p>Popular searches:</p>
+            <div class="suggestion-tags">
+              <button class="suggestion-tag" (click)="searchQuery = 'Call of Duty'; onSearch()">Call of Duty</button>
+              <button class="suggestion-tag" (click)="searchQuery = 'GTA'; onSearch()">GTA</button>
+              <button class="suggestion-tag" (click)="searchQuery = 'FIFA'; onSearch()">FIFA</button>
+            </div>
+          </div>
+          <button class="clear-search-btn" (click)="clearSearch()">
+            <i class="fas fa-times"></i> Clear Search
+          </button>
+        </div>
+      </div>
+  
+      <ng-container *ngIf="filteredGames.length > 0">
+        <ng-container *ngIf="activeTab !== 'all'; else allCategories">
+          <div class="category-section">
+            <h3 class="category-title">{{getCategoryTitle(activeTab)}}</h3>
+            <div class="menu-grid">
+              <div class="game-item" *ngFor="let game of getVisibleGames()">
+                <div class="item-image">
+                  <img [src]="game.image" [alt]="game.name">
+                  <button class="quick-view-btn" (click)="openQuickView(game)">Quick View</button>
+                </div>
+                <div class="item-info">
+                  <h3>{{game.name}}</h3>
+                  <p class="item-description">{{game.description}}</p>
+                  <div class="item-meta">
+                    <span class="price">₹{{game.price}}</span>
+                    <div class="rating">
+                      <i class="fas fa-star"></i>
+                      <span>{{game.rating}}</span>
+                      <span class="review-count">({{game.reviews}})</span>
+                    </div>
+                  </div>
+                  <div class="item-actions">
+                    <button class="buy-now-btn" (click)="buyGame(game)">
+                      <i class="fas fa-shopping-cart"></i> Buy Now
+                    </button>
+                    <button class="wishlist-btn" [class.active]="game.isFavorite" (click)="toggleFavorite(game)">
+                      <i class="far fa-heart"></i> Wishlist
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+  
+        <ng-template #allCategories>
+          <ng-container *ngFor="let category of getUniqueCategories()">
+            <div class="category-section">
+              <h3 class="category-title">{{getCategoryTitle(category)}}</h3>
+              <div class="menu-grid">
+                <div class="game-item" *ngFor="let game of getGamesByCategory(category) | slice:0:itemsToShow">
+                  <div class="item-image">
+                    <img [src]="game.image" [alt]="game.name">
+                    <button class="quick-view-btn" (click)="openQuickView(game)">Quick View</button>
+                  </div>
+                  <div class="item-info">
+                    <h3>{{game.name}}</h3>
+                    <p class="item-description">{{game.description}}</p>
+                    <div class="item-meta">
+                      <span class="price">₹{{game.price}}</span>
+                      <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>{{game.rating}}</span>
+                        <span class="review-count">({{game.reviews}})</span>
+                      </div>
+                    </div>
+                    <div class="item-actions">
+                      <button class="buy-now-btn" (click)="buyGame(game)">
+                        <i class="fas fa-shopping-cart"></i> Buy Now
+                      </button>
+                      <button class="wishlist-btn" [class.active]="game.isFavorite" (click)="toggleFavorite(game)">
+                        <i class="far fa-heart"></i> Wishlist
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-template>
+      </ng-container>
+    </div>
+  
+    <div class="menu-footer" *ngIf="itemsToShow < filteredGames.length && activeTab !== 'all'">
+      <button class="load-more-btn" (click)="loadMore()">Load More Games</button>
+    </div>
+  </div>
+  
+  <!-- Quick View Modal -->
+  <div class="quick-view-overlay" *ngIf="quickViewGame" (click)="closeQuickView()">
+    <div class="quick-view-container" (click)="$event.stopPropagation()">
+      <button class="close-modal-btn" (click)="closeQuickView()">
+        <i class="fas fa-times"></i>
+      </button>
+  
+      <div class="quick-view-grid">
+        <div class="product-gallery">
+          <div class="main-image-container">
+            <img [src]="quickViewGame.image" [alt]="quickViewGame.name + ' game image'">
+          </div>
+          <div class="thumbnail-scroller">
+            <div class="thumbnail" *ngFor="let img of quickViewGame.screenshots" 
+                 [class.active]="img === quickViewGame.image"
+                 (click)="quickViewGame.image = img">
+              <img [src]="img" [alt]="quickViewGame.name + ' screenshot'">
+            </div>
+          </div>
+        </div>
+  
+        <div class="product-details">
+          <h1 class="game-title">{{quickViewGame.name}}</h1>
+          <p class="game-description">{{quickViewGame.description}}</p>
+          <div class="price-section">
+            <span class="price">₹{{quickViewGame.price}}</span>
+          </div>
+          <div class="rating">
+            <i class="fas fa-star"></i> {{quickViewGame.rating}} ({{quickViewGame.reviews}} reviews)
+          </div>
+          <div class="action-buttons">
+            <button class="primary-action" (click)="buyGame(quickViewGame)">
+              <i class="fas fa-shopping-cart"></i> Buy Now
+            </button>
+            <button class="secondary-action" (click)="toggleFavorite(quickViewGame)">
+              <i class="far fa-heart"></i> Wishlist
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
