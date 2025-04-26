@@ -1,0 +1,111 @@
+/* Overall navbar */
+.navbar {
+  width: 100%;
+  background-color: #1e1e2f;
+  color: #fff;
+  padding: 12px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Container for logo and nav links */
+.navbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo styles */
+.navbar-brand .logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: rgb(0, 255, 221);
+}
+
+.logo-icon {
+  font-size: 1.6rem;
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+}
+
+/* Navigation Links */
+.navbar-links .nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links .nav-links li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.navbar-links .nav-links li a:hover {
+  background-color: #00ffcc;
+  color: #000;
+}
+/* Profile button */
+.profile-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+.profile-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Modal styles */
+.profile-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+  color: #000;
+  text-align: left;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #000;
+}
+
+.modal-content h2 {
+  margin-bottom: 16px;
+  color: #1e1e2f;
+}

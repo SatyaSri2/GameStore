@@ -1,0 +1,45 @@
+.cart-container {
+  color: yellow;
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.empty-cart {
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.cart-item {
+  color: white;
+  display: flex;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.game-image {
+  width: 150px;
+  height: auto;
+  margin-right: 1rem;
+  border-radius: 10px;
+}
+
+.game-info h3 {
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.cart-summary {
+  color: red;
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.cart-summary button {
+  background-color: yellow;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+}

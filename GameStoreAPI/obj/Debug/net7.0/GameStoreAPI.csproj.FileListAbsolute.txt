@@ -1,0 +1,8 @@
+C:\game-store\GameStoreAPI\obj\Debug\net7.0\GameStoreAPI.csproj.AssemblyReference.cache
+C:\game-store\GameStoreAPI\obj\Debug\net7.0\GameStoreAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\game-store\GameStoreAPI\obj\Debug\net7.0\GameStoreAPI.AssemblyInfoInputs.cache
+C:\game-store\GameStoreAPI\obj\Debug\net7.0\GameStoreAPI.AssemblyInfo.cs
+C:\game-store\GameStoreAPI\obj\Debug\net7.0\GameStoreAPI.csproj.CoreCompileInputs.cache
+C:\game-store\GameStoreAPI\obj\Debug\net7.0\GameStoreAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\game-store\GameStoreAPI\obj\Debug\net7.0\GameStoreAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\game-store\GameStoreAPI\obj\Debug\net7.0\GameStoreAPI.sourcelink.json
